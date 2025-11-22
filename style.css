@@ -1,0 +1,567 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* API Key状态区域 */
+.api-key-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.api-key-btn {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.api-key-btn:hover {
+    background: #5649c4;
+    transform: scale(1.05);
+}
+
+.api-key-status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status-valid {
+    background: #a8e6cf;
+    color: #2a6f4c;
+}
+
+.status-invalid {
+    background: #ffaaa5;
+    color: #c0392b;
+}
+
+/* 搜索区域 - 关键修改开始 */
+.search-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    min-width: 200px;
+}
+
+#searchInput:focus {
+    border-color: #2ecc71;
+}
+
+#searchButton {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    height: 45px;
+    min-width: 80px;
+}
+
+#searchButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+#searchButton:active {
+    transform: translateY(0);
+}
+
+/* 修复按钮跳动问题 - 关键修复 */
+.ai-toggle {
+    background: #ff7675;
+    color: white;
+    border: none;
+    width: 105px; /* 固定宽度，防止文本变化导致跳动 */
+    height: 45px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 文本水平居中 */
+    gap: 6px; /* 图标和文字间距 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ai-toggle i {
+    font-size: 16px; /* 图标大小 */
+}
+
+.ai-toggle.active {
+    background: #00b894;
+    box-shadow: 0 0 10px rgba(0, 184, 148, 0.4);
+}
+
+.ai-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* 关键修改结束 */
+
+.result-section {
+    margin-bottom: 30px;
+}
+
+.result-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+.result-card h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.data-source {
+    background: #e9ecef;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.data-source.local {
+    background: #a8e6cf;
+    color: #2a6f4c;
+}
+
+.data-source.ai {
+    background: #a8d1ff;
+    color: #2c3e50;
+}
+
+#resultContent {
+    text-align: center;
+}
+
+.result-info {
+    text-align: left;
+}
+
+.result-info h3 {
+    color: #3498db;
+    margin: 15px 0 8px;
+    font-size: 1.4em;
+}
+
+.result-info p {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin: 8px 0;
+    border-left: 4px solid #3498db;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.result-info p.scientific-name {
+    background: #e3f2fd;
+    border-left-color: #2196f3;
+    font-style: italic;
+    color: #1565c0;
+}
+
+.placeholder {
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+.not-found {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 20px;
+}
+
+.examples {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.examples h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.example-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.example-btn {
+    background: #e9ecef;
+    border: 1px solid #dee2e6;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.example-btn:hover {
+    background: #3498db;
+    color: white;
+    transform: scale(1.05);
+}
+
+.ai-example {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    color: #d63031;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.ai-badge {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    animation: modalOpen 0.4s;
+}
+
+@keyframes modalOpen {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #7f8c8d;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #e74c3c;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+#apiKeyInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: monospace;
+}
+
+#apiKeyInput:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-primary, .btn-secondary {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+#apiKeyTestResult {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.test-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.test-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* 加载状态 */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(52, 152, 219, 0.2);
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* 模式状态提示 */
+#modeStatus {
+    text-align: center;
+    margin: 10px 0;
+    opacity: 0;
+    transition: opacity 1s;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #e9ecef;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .search-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #searchButton, .ai-toggle {
+        width: 100%;
+    }
+    
+    .ai-toggle {
+        width: 110px;
+        font-size: 13px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .result-card {
+        padding: 20px;
+    }
+    
+    .api-key-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    .example-buttons {
+        gap: 5px;
+    }
+    
+    .example-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .ai-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+}

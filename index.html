@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔬 生物分类查询助手 </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 生物分类查询助手</h1>
+            <p>输入生物名称，查看其完整的分类信息</p>
+            <div class="api-key-section" id="apiKeySection">
+                <button id="apiKeyButton" class="api-key-btn">
+                    <i class="fas fa-key"></i> 设置API Key
+                </button>
+                <span id="apiKeyStatus" class="api-key-status"></span>
+            </div>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="输入生物名称，如：人类、老虎、玫瑰... 或尝试'熊猫'、'帝王蝶'...">
+            <button id="searchButton">查询</button>
+            <button id="aiToggle" class="ai-toggle active">
+                <i class="fas fa-robot"></i> AI模式
+            </button>
+        </div>
+
+        <div class="result-section" id="resultSection">
+            <div class="result-card" id="resultCard">
+                <div class="result-header">
+                    <h2>查询结果</h2>
+                    <span id="dataSource" class="data-source"></span>
+                </div>
+                <div id="resultContent">
+                    <p class="placeholder">请输入生物名称开始查询...
+                        <br><small>开启AI模式可查询更多生物（需要API Key）</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="examples">
+            <h3>📚 示例查询</h3>
+            <div class="example-buttons">
+                <button class="example-btn" data-name="人类">人类</button>
+                <button class="example-btn" data-name="老虎">老虎</button>
+                <button class="example-btn" data-name="玫瑰">玫瑰</button>
+                <button class="example-btn" data-name="家鸽">家鸽</button>
+                <button class="example-btn" data-name="蘑菇">蘑菇</button>
+                <button class="example-btn ai-example" data-name="熊猫">🐼 熊猫</button>
+                <button class="example-btn ai-example" data-name="帝王蝶">🦋 帝王蝶</button>
+                <button class="example-btn ai-example" data-name="蓝鲸">🐋 蓝鲸</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>生物分类查询助手 | 本地数据 + AI增强 | 
+                <a href="#" id="howToUse">如何获取API Key?</a>
+            </p>
+        </footer>
+    </div>
+
+    <div id="apiKeyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-key"></i> 设置DashScope API Key</h2>
+            <p>1. 访问 <a href="https://dashscope.console.aliyun.com/overview" target="_blank">DashScope控制台</a></p>
+            <p>2. 注册/登录阿里云账号</p>
+            <p>3. 在"API-KEY管理"页面创建新Key</p>
+            <div class="form-group">
+                <label for="apiKeyInput">API Key:</label>
+                <input type="password" id="apiKeyInput" placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                <small>API Key会保存在本地浏览器，不会上传到任何服务器</small>
+            </div>
+            <div class="modal-buttons">
+                <button id="saveApiKey" class="btn-primary">保存</button>
+                <button id="testApiKey" class="btn-secondary">测试连接</button>
+            </div>
+            <div id="apiKeyTestResult"></div>
+        </div>
+    </div>
+
+    <script src="biologyData.js"></script>
+    <script src="aiService.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

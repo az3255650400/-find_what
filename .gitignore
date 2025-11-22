@@ -1,0 +1,23 @@
+# 忽略操作系统文件
+.DS_Store
+Thumbs.db
+
+# 忽略IDE/编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 忽略构建/依赖文件
+node_modules/
+dist/
+build/
+
+# 忽略敏感数据
+.env
+*.env
+config/keys.js
+local-storage-data/
+
+# 忽略API Key相关
+localStorage/*
